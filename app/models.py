@@ -13,7 +13,7 @@ class User(UserMixin,db.Model):
     __tablename__='users'
     id=db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
-    password=db.Column(db.String(64))
+    init_password=db.Column(db.String(64))
     password_hash = db.Column(db.String(128))
     name = db.Column(db.String(64))
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
