@@ -1,10 +1,14 @@
 {% extends "base.html" %}
-{% block content %}
+{% block page_content %}
 <div class="main report">
         <div class="cover-container">
           <div class="inner" style="color:white">
+              {% if current_user.is_authenticated %}
+              <h1 class="cover-heading">你好，{{ current_user.username }}</h1>
+              {% else %}
             <h1 class="cover-heading">欢迎，请登录</h1>
             <p class="lead">WELCOME，PLEASE LOGIN!</p>
+              {% endif %}
           </div>
     </div>
 </div>
