@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block page_content %}
 <div class="main report">
+    {% if current_user.is_authenticated %}
+    <div class="left-menu">
+    这是左侧菜单栏
+    </div>
+    {% else %}
         <div class="cover-container">
           <div class="inner" style="color:white">
-              {% if current_user.is_authenticated %}
-              <h1 class="cover-heading">你好，{{ current_user.username }}</h1>
-              {% else %}
             <h1 class="cover-heading">欢迎，请登录</h1>
             <p class="lead">WELCOME，PLEASE LOGIN!</p>
-              {% endif %}
           </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
