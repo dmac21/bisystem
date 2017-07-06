@@ -1,10 +1,119 @@
 {% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/jquery-accordion-menu.css') }}">
+    <style type="text/css">
+    *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+    body{background:#f0f0f0;}
+    .content{width:260px;margin:20px auto;}
+    .filterinput{
+        background-color:rgba(249, 244, 244, 0);
+        border-radius:15px;
+        width:90%;
+        height:30px;
+        border:thin solid #FFF;
+        text-indent:0.5em;
+        font-weight:bold;
+        color:#FFF;
+    }
+    #demo-list a{
+        overflow:hidden;
+        text-overflow:ellipsis;
+        -o-text-overflow:ellipsis;
+        white-space:nowrap;
+        width:100%;
+    }
+    </style>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-1.11.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-accordion-menu.js') }}"></script>
+    <script type="text/javascript">
+    $(function(){
+        //顶部导航切换
+        $("#demo-list li").click(function(){
+            $("#demo-list li.active").removeClass("active")
+            $(this).addClass("active");
+        })
+    })
+    </script>
+
+
+{% endblock %}
 {% block page_content %}
 <div class="main report">
     {% if current_user.is_authenticated %}
-    <div class="left-menu">
-    这是左侧菜单栏
-    </div>
+    <div id="jquery-accordion-menu" class="jquery-accordion-menu red">
+		<div class="jquery-accordion-menu-header" id="form"></div>
+		<ul id="demo-list">
+		   <li class="active"><a href="#"><i class="fa fa-home"></i>主页</a></li>
+			<li><a href="#"><i class="fa fa-glass"></i>微信公众号</a></li>
+			<li><a href="#"><i class="fa fa-cog"></i>主要投资项目</a>
+				<ul class="submenu">
+					<li><a href="#">NBG</a></li>
+					<li><a href="#">SBG</a></li>
+					<li><a href="#">独创</a>
+						<ul class="submenu">
+							<li><a href="#">微信自媒体</a></li>
+							<li><a href="#">微信电商</a></li>
+							<li><a href="#">淘客</a></li>
+							<li><a href="#">京东头条&淘宝头条</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
+			<li><a href="#"><i class="fa fa-suitcase"></i>其他投资项目</a>
+				<ul class="submenu">
+					<li><a href="#">A</a></li>
+					<li><a href="#">B</a></li>
+					<li><a href="#">C</a></li>
+					<li><a href="#">D</a></li>
+				</ul>
+			</li>
+			<li><a href="#"><i class="fa fa-user"></i>关于系统</a></li>
+			<li><a href="#"><i class="fa fa-envelope"></i>联系我们</a></li>
+
+		</ul>
+	</div>
+        <script type="text/javascript">
+        (function($) {
+        $.expr[":"].Contains = function(a, i, m) {
+            return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+        };
+        function filterList(header, list) {
+            //@header 头部元素
+            //@list 无需列表
+            //创建一个搜素表单
+            var form = $("<form>").attr({
+                "class":"filterform",
+                action:"#"
+            }), input = $("<input>").attr({
+                "class":"filterinput",
+                type:"text"
+            });
+            $(form).append(input).appendTo(header);
+            $(input).change(function() {
+                var filter = $(this).val();
+                if (filter) {
+                    $matches = $(list).find("a:Contains(" + filter + ")").parent();
+                    $("li", list).not($matches).slideUp();
+                    $matches.slideDown();
+                } else {
+                    $(list).find("li").slideDown();
+                }
+                return false;
+            }).keyup(function() {
+                $(this).change();
+            });
+        }
+        $(function() {
+            filterList($("#form"), $("#demo-list"));
+        });
+        })(jQuery);
+        </script>
+
+        <script type="text/javascript">
+            jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+        </script>
     {% else %}
         <div class="cover-container">
           <div class="inner" style="color:white">
