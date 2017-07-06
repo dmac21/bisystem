@@ -17,10 +17,12 @@ html, body{ margin:0; height:100%; }
     float: left;
 }
 .report-content{
-    border:5px solid yellow;
+    text-align: center;
+    border:3px solid yellow;
     width: 85%;
     height: 100%;
     float: left;
+    line-height:100%;
 }
 .login{
     border:5px solid red;

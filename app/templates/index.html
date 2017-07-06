@@ -45,35 +45,49 @@
 		<div class="jquery-accordion-menu-header" id="form"></div>
 		<ul id="demo-list">
 		   <li class="active"><a href="#"><i class="fa fa-home"></i>主页</a></li>
-			<li><a href="#"><i class="fa fa-glass"></i>微信公众号</a></li>
-			<li><a href="#"><i class="fa fa-cog"></i>主要投资项目</a>
+			<li><a href="###" onclick="showAtRight('/wechat')"><i class="fa fa-comments-o"></i>微信公众号</a></li>
+			<li><a href="#"><i class="fa fa-suitcase"></i>投资项目</a>
 				<ul class="submenu">
 					<li><a href="#">NBG</a></li>
 					<li><a href="#">SBG</a></li>
-					<li><a href="#">独创</a>
-						<ul class="submenu">
-							<li><a href="#">微信自媒体</a></li>
-							<li><a href="#">微信电商</a></li>
-							<li><a href="#">淘客</a></li>
-							<li><a href="#">京东头条&淘宝头条</a></li>
-						</ul>
-					</li>
+					<li><a href="#">独创</a>	</li>
 				</ul>
 			</li>
-			<li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
-			<li><a href="#"><i class="fa fa-suitcase"></i>其他投资项目</a>
+			<li><a href="###" onclick="showAtRight('/sysmanage')"><i class="fa fa-cogs"></i>系统管理 </a></li>
+			<li><a href="#"><i class="fa fa-bar-chart-o"></i>数据分析</a>
 				<ul class="submenu">
-					<li><a href="#">A</a></li>
-					<li><a href="#">B</a></li>
-					<li><a href="#">C</a></li>
-					<li><a href="#">D</a></li>
+					<li><a href="#">周报</a></li>
+					<li><a href="#">月报</a></li>
+					<li><a href="#">半年报</a></li>
+					<li><a href="#">年报</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><i class="fa fa-user"></i>关于系统</a></li>
 			<li><a href="#"><i class="fa fa-envelope"></i>联系我们</a></li>
 
 		</ul>
-	</div>
+	    </div>
+        <div class="report-content">
+        <h4>
+            <strong>使用指南：</strong><br>
+            <br><br>默认页面内容……
+        </h4>
+        </div>
+        <script type="text/javascript">
+            function showAtRight(url){
+                $.ajax({
+                    type :"GET",
+                    url : url,
+                    dataType:"html",
+                    success : function(data) {//返回数据根据结果进行相应的处理
+                        $(".report-content").html(data);
+                    },
+                    error:function(){
+                        $(".report-content").html("获取数据失败！");
+                    }
+                });
+            }
+        </script>
         <script type="text/javascript">
         (function($) {
         $.expr[":"].Contains = function(a, i, m) {
