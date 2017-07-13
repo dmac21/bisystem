@@ -1,1 +1,37 @@
-<h1>hello , I am wechat</h1>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 echarts.js -->
+    <script src="static/js/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 100%;height:100%;"></div>
+    <h1>{{ data['ref_date'] }}</h1>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '微信每日粉丝总数'
+            },
+            tooltip: {},
+            legend: {
+                data:['粉丝总数']
+            },
+            xAxis: {
+                /*data: {{ data['ref_date'] }}*/
+                data: ['2017-07-01', '2017-07-02', '2017-07-03', '2017-07-04', '2017-07-05', '2017-07-06', '2017-07-07', '2017-07-08', '2017-07-09', '2017-07-10', '2017-07-11', '2017-07-12']
+            },
+            yAxis: {},
+            series: [{
+                name: '每日粉丝总数',
+                type: 'bar',
+                data: {{ data['cumulate_user'] }}
+            }]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
