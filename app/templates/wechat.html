@@ -6,13 +6,17 @@
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 100%;height:100%;"></div>
+    <div id="main" style="width: 100%;height:50%;"></div>
+    <div id="main2" style="width: 100%;height:50%;"></div>
     <script type="text/javascript">
 
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
+        var myChart2 = echarts.init(document.getElementById('main2'));
         // 指定图表的配置项和数据
         var option = {
+            backgroundColor: '#fff',
+            color: ['#3398DB'],
             title: {
                 text: '微信每日粉丝总数'
             },
@@ -31,6 +35,7 @@
             }]
         };
         myChart.setOption(option);
+        myChart2.setOption(option);
     </script>
 </body>
 </html>
