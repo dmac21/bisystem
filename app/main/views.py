@@ -15,13 +15,19 @@ def index():
 
 @main.route('/wechat')
 def wechat():
-    sql="select ref_date,sum(cumulate_user) cumulate_user from usercumulate_data where ref_date>='2017-07-01' group by ref_date"
+    sql="select ref_date,sum(cumulate_user) cumulate_user from usercumulate_data where ref_date>='2017-05-01' group by ref_date"
+    sql2="select charge_team ,count(*) wechats from  account_data group by charge_team"
     cursor.execute(sql)
     data =cursor.fetchall()
+    cursor.execute(sql2)
+    data2=cursor.fetchall()
     jsonstr={}
+    jsonstr2={}
+    jsonstr2['charge_team']=[x[0] for x in data2]
+    jsonstr2['wechats'] = [int(x[1]) for x in data2]
     jsonstr['ref_date']=[x[0].strftime('%Y-%m-%d') for x in data]
     jsonstr['cumulate_user'] = [int(x[1]) for x in data]
-    return render_template('wechat.html',data=jsonstr)
+    return render_template('wechat.html',data=jsonstr,data2=jsonstr2,data3=data)
 
 @main.route('/sysmanage')
 def sysmanage():

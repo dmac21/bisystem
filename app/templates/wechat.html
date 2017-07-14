@@ -14,7 +14,7 @@
         var myChart = echarts.init(document.getElementById('main'));
         var myChart2 = echarts.init(document.getElementById('main2'));
         // 指定图表的配置项和数据
-        var option = {
+        var option1 = {
             backgroundColor: '#fff',
             color: ['#3398DB'],
             title: {
@@ -34,8 +34,48 @@
                 data: {{ data['cumulate_user'] }}
             }]
         };
-        myChart.setOption(option);
-        myChart2.setOption(option);
+        var option2 = {
+            backgroundColor: '#fff',
+            color: ['#3398DB'],
+            title: {
+                text: '微信团队账号数'
+            },
+            tooltip: {},
+            legend: {
+                data:['账号数']
+            },
+            xAxis: {
+                data: {{ data2['charge_team']|tojson }}
+            },
+            yAxis: {},
+            series: [{
+                name: '微信团队账号数',
+                type: 'bar',
+                data: {{ data2['wechats'] }}
+            }]
+        };
+        myChart.setOption(option1);
+        myChart2.setOption(option2);
     </script>
+<table class="table table-hover">
+	<caption>微信每日粉丝总数</caption>
+	<thead>
+		<tr>
+			<th>日期</th>
+			<th>粉丝数</th>
+		</tr>
+	</thead>
+	<tbody>
+    {% for (k,v) in data.items() %}
+        {% for a in k %}
+
+		<tr>
+			<td>{{ a }}</td>
+			<td>{{ b }}</td>
+		</tr>
+        {% endfor %}
+    {% endfor %}
+	</tbody>
+</table>
 </body>
 </html>
